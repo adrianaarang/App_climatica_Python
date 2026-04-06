@@ -7,35 +7,87 @@ Aplicación de gestión y registro del clima.
 ## 📁 Estructura del proyecto
 
 ```
-weather-app/
+App_climatica_Python/
+├── .github/
+│   └── workflows/
+│       └── ci.yml               # Pipeline de CI (tests automáticos)
 ├── controller/
 │   ├── control_alert.py         # Controlador de alertas
 │   ├── control_menu.py          # Controlador del menú
 │   └── control_time.py          # Controlador de tiempo/fechas
 ├── data/
-│   └── register.json            # Almacenamiento de registros
+│   └── register.json            # Almacenamiento de registros (autogenerado)
 ├── model/
-│   ├── manager.py               # Gestor principal de datos
-│   └── register_weather.py      # Modelo de registro del clima
+│   ├── __init__.py
+│   ├── manager.py               # Gestor principal de datos (JSON)
+│   └── register_weather.py      # Lógica de registros del clima
 ├── test/
-│   ├── test_control_alert.py    # Tests del controlador de alertas
-│   ├── test_control_weather.py  # Tests del controlador del clima
-│   ├── test_index.py            # Tests del punto de entrada
-│   ├── test_manager.py          # Tests del gestor
-│   └── test_register_weather.py # Tests del modelo de clima
+│   ├── __init__.py
+│   ├── test_control_alert.py
+│   ├── test_control_weather.py
+│   ├── test_index.py
+│   ├── test_manager.py
+│   └── test_register_weather.py
 ├── view/
 │   └── menu.py                  # Vista del menú principal
-└── index.py                     # Punto de entrada de la aplicación
+├── conftest.py                  # Configuración de pytest
+├── index.py                     # Punto de entrada de la aplicación
+├── requirements.txt             # Dependencias del proyecto
+└── README.md
 ```
 
 ---
 
-## 🚀 Descargar Repo
+## 🚀 Instalación y uso
+
+### 1. Clonar el repositorio
 
 ```bash
-# Clonar el repositorio
 git clone git@github.com:lermns/App_climatica_Python.git
+cd App_climatica_Python
 ```
+
+### 2. Crear y activar el entorno virtual
+
+```bash
+# Crear
+python -m venv venv
+
+# Activar en Windows
+venv\Scripts\activate
+
+# Activar en Mac/Linux
+source venv/bin/activate
+```
+
+### 3. Instalar dependencias
+
+```bash
+pip install -r requirements.txt
+```
+
+### 4. Ejecutar la aplicación ()
+
+```bash
+python index.py
+```
+
+---
+
+## 🧪 Tests
+
+```bash
+# Ejecutar todos los tests
+pytest
+
+# Ver detalle de cada test
+pytest -v
+
+# Ejecutar solo un archivo de tests
+pytest test/test_manager.py -v
+```
+
+> ⚠️ Ejecuta siempre los tests desde la raíz del proyecto, no desde dentro de `/test`.
 
 ---
 
