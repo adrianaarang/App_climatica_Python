@@ -1,29 +1,17 @@
+import os
 from model.manager import comprobar_archivo_json, registro_valido
 
-# mock variable
-
-mockMapaTrue = {"fecha": "",
-                "zona": "",
-                "temperatura": "",
-                "humedad": "",
-                "viento": "",}
-
-mockMapaFalse = {"fechas": "",
-                "zona": "",
-                "temperatura": "",
-                "humedad": "",
-                "viento": "",}
-
-# test func
+REGISTRO_VALIDO = {"fecha": "", "zona": "", "temperatura": "", "humedad": "", "viento": ""}
+REGISTRO_INVALIDO = {"fechas": "", "zona": "", "temperatura": "", "humedad": "", "viento": ""}
 
 def test_comprobar_archivo_json():
-    assert comprobar_archivo_json() == "data\\register.json"
-
-def test_comprobar_archivo_json_not_match():
-    assert comprobar_archivo_json() != "data\\reegister.json"
+    assert comprobar_archivo_json() == os.path.join("data", "register.json")
 
 def test_registro_valido():
-    assert registro_valido(mockMapaTrue)
-    
-def test_registro_no_valido():
-    assert not registro_valido(mockMapaFalse)
+    assert registro_valido(REGISTRO_VALIDO) is True
+
+def test_registro_invalido():
+    assert registro_valido(REGISTRO_INVALIDO) is False
+
+def test_registro_vacio():
+    assert registro_valido({}) is False  # caso mapa vacío
