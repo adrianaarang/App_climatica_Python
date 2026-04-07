@@ -3,10 +3,25 @@ from datetime import datetime
 
 def validar_fecha(fecha_str):
     try:
-        fecha = datetime.strptime(fecha_str.strip(), "%Y-%m-%d")
-        return True, fecha.strftime("%Y-%m-%d")
+        fecha = datetime.strptime(fecha_str.strip(), "%d-%m-%Y")
+        hoy = datetime.now()
+
+        try:
+            limite_pasado = hoy.replace(year=hoy.year - 10)
+        except ValueError:
+            
+            limite_pasado = hoy.replace(year=hoy.year - 10, day=28)
+
+        if fecha.date() > hoy.date():
+            return False, "La fecha no puede ser futura."
+
+        if fecha.date() < limite_pasado.date():
+            return False, "La fecha no puede ser anterior a 10 años."
+
+        return True, fecha.strftime("%d-%m-%Y")
+
     except (ValueError, AttributeError):
-        return False, "Fecha inválida. Usa el formato YYYY-MM-DD."
+        return False, "Fecha inválida. Usa el formato DD-MM-YYYY."
 
 
 def validar_zona(zona, zonas_validas):
